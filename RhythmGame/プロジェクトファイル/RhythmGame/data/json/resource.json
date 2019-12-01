@@ -1,0 +1,551 @@
+{
+  "graph": [
+    {
+      "name": "title_back",
+      "path": "./data/graph/title/title_back.png",
+      "width": 1920,
+      "height": 1080,
+      "vertical": 1,
+      "horizontal": 1,
+      "loop": false,
+      "interval": 0,
+      "sheets": 1,
+      "scope": [
+        "title",
+        "back",
+        "all"
+      ]
+    },
+    {
+      "name": "title_logo",
+      "path": "./data/graph/title/titleLogo.png",
+      "width": 512,
+      "height": 128,
+      "vertical": 1,
+      "horizontal": 1,
+      "loop": false,
+      "interval": 0,
+      "sheets": 1,
+      "scope": [
+        "title",
+        "logo",
+        "all"
+      ]
+    },
+    {
+      "name": "title_ui",
+      "path": "./data/graph/title/TitleUI.png",
+      "width": 256,
+      "height": 64,
+      "vertical": 1,
+      "horizontal": 1,
+      "loop": false,
+      "interval": 0,
+      "sheets": 1,
+      "scope": [
+        "title",
+        "ui",
+        "all"
+      ]
+    },
+    {
+      "name": "rank_no",
+      "path": "./data/graph/ending/RankingNo.png",
+      "width": 64,
+      "height": 64,
+      "vertical": 1,
+      "horizontal": 5,
+      "loop": false,
+      "interval": 0,
+      "sheets": 5,
+      "scope": [
+        "rank",
+        "ending",
+        "all"
+      ]
+    },
+    {
+      "name": "select_back",
+      "path": "./data/graph/music_select/SelectScene.png",
+      "width": 1920,
+      "height": 1080,
+      "vertical": 1,
+      "horizontal": 1,
+      "loop": false,
+      "interval": 0,
+      "sheets": 1,
+      "scope": [
+        "select",
+        "back",
+        "all"
+      ]
+    },
+    {
+      "name": "select_cursol_L",
+      "path": "./data/graph/music_select/SelectCursol_L.png",
+      "width": 64,
+      "height": 64,
+      "vertical": 1,
+      "horizontal": 1,
+      "loop": false,
+      "interval": 0,
+      "sheets": 1,
+      "scope": [
+        "select",
+        "cursol",
+        "all"
+      ]
+    },
+    {
+      "name": "select_cursol_R",
+      "path": "./data/graph/music_select/SelectCursol_R.png",
+      "width": 64,
+      "height": 64,
+      "vertical": 1,
+      "horizontal": 1,
+      "loop": false,
+      "interval": 0,
+      "sheets": 1,
+      "scope": [
+        "select",
+        "cursol",
+        "all"
+      ]
+    },
+    {
+      "name": "monoceros_jacket",
+      "path": "./data/graph/music_select/monoceros_jacket.png",
+      "width": 320,
+      "height": 480,
+      "vertical": 1,
+      "horizontal": 1,
+      "loop": false,
+      "interval": 0,
+      "sheets": 1,
+      "scope": [
+        "select",
+        "jacket",
+        "all"
+      ]
+    },
+    {
+      "name": "fancie_jacket",
+      "path": "./data/graph/music_select/fancie_jacket.png",
+      "width": 320,
+      "height": 480,
+      "vertical": 1,
+      "horizontal": 1,
+      "loop": false,
+      "interval": 0,
+      "sheets": 1,
+      "scope": [
+        "select",
+        "jacket",
+        "all"
+      ]
+    },
+    {
+      "name": "tap_notes",
+      "path": "./data/graph/game/TapNotes.png",
+      "width": 64,
+      "height": 16,
+      "vertical": 1,
+      "horizontal": 1,
+      "loop": false,
+      "interval": 0,
+      "sheets": 1,
+      "scope": [
+        "game",
+        "note",
+        "all"
+      ]
+    },
+    {
+      "name": "hold_notes",
+      "path": "./data/graph/game/HoldNotes.png",
+      "width": 64,
+      "height": 16,
+      "vertical": 1,
+      "horizontal": 1,
+      "loop": false,
+      "interval": 0,
+      "sheets": 1,
+      "scope": [
+        "game",
+        "note",
+        "all"
+      ]
+    },
+    {
+      "name": "game_back",
+      "path": "./data/graph/game/GameBack.png",
+      "width": 1920,
+      "height": 1080,
+      "vertical": 1,
+      "horizontal": 1,
+      "loop": false,
+      "interval": 0,
+      "sheets": 1,
+      "scope": [
+        "game",
+        "back",
+        "all"
+      ]
+    },
+    {
+      "name": "judge_line",
+      "path": "./data/graph/game/judge_line.png",
+      "width": 256,
+      "height": 16,
+      "vertical": 1,
+      "horizontal": 1,
+      "loop": false,
+      "interval": 0,
+      "sheets": 1,
+      "scope": [
+        "game",
+        "judge_line",
+        "all"
+      ]
+    },
+    {
+      "name": "score",
+      "path": "./data/graph/ui/score.png",
+      "width": 110,
+      "height": 45,
+      "vertical": 1,
+      "horizontal": 1,
+      "loop": false,
+      "interval": 0,
+      "sheets": 1,
+      "scope": [
+        "game",
+        "score",
+        "ui",
+        "all"
+      ]
+    },
+    {
+      "name": "perfect",
+      "path": "./data/graph/ui/perfect.png",
+      "width": 110,
+      "height": 45,
+      "vertical": 1,
+      "horizontal": 1,
+      "loop": false,
+      "interval": 0,
+      "sheets": 1,
+      "scope": [
+        "game",
+        "ui",
+        "perfect",
+        "all"
+      ]
+    },
+    {
+      "name": "good",
+      "path": "./data/graph/ui/good.png",
+      "width": 110,
+      "height": 45,
+      "vertical": 1,
+      "horizontal": 1,
+      "loop": false,
+      "interval": 0,
+      "sheets": 1,
+      "scope": [
+        "game",
+        "ui",
+        "good",
+        "all"
+      ]
+    },
+    {
+      "name": "miss",
+      "path": "./data/graph/ui/miss.png",
+      "width": 110,
+      "height": 45,
+      "vertical": 1,
+      "horizontal": 1,
+      "loop": false,
+      "interval": 0,
+      "sheets": 1,
+      "scope": [
+        "game",
+        "ui",
+        "miss",
+        "all"
+      ]
+    },
+    {
+      "name": "pushK",
+      "path": "./data/graph/game/pushK.png",
+      "width": 64,
+      "height": 40,
+      "vertical": 1,
+      "horizontal": 1,
+      "loop": false,
+      "interval": 0,
+      "sheets": 1,
+      "scope": [
+        "game",
+        "button",
+        "all"
+      ]
+    },
+    {
+      "name": "pushJ",
+      "path": "./data/graph/game/pushJ.png",
+      "width": 64,
+      "height": 40,
+      "vertical": 1,
+      "horizontal": 1,
+      "loop": false,
+      "interval": 0,
+      "sheets": 1,
+      "scope": [
+        "game",
+        "button",
+        "all"
+      ]
+    },
+    {
+      "name": "pushD",
+      "path": "./data/graph/game/pushD.png",
+      "width": 64,
+      "height": 40,
+      "vertical": 1,
+      "horizontal": 1,
+      "loop": false,
+      "interval": 0,
+      "sheets": 1,
+      "scope": [
+        "game",
+        "button",
+        "all"
+      ]
+    },
+    {
+      "name": "pushF",
+      "path": "./data/graph/game/pushF.png",
+      "width": 64,
+      "height": 40,
+      "vertical": 1,
+      "horizontal": 1,
+      "loop": false,
+      "interval": 0,
+      "sheets": 1,
+      "scope": [
+        "game",
+        "button",
+        "all"
+      ]
+    },
+    {
+      "name": "not_pushK",
+      "path": "./data/graph/game/notpushK.png",
+      "width": 64,
+      "height": 40,
+      "vertical": 1,
+      "horizontal": 1,
+      "loop": false,
+      "interval": 0,
+      "sheets": 1,
+      "scope": [
+        "game",
+        "button",
+        "all"
+      ]
+    },
+    {
+      "name": "not_pushF",
+      "path": "./data/graph/game/notpushF.png",
+      "width": 64,
+      "height": 40,
+      "vertical": 1,
+      "horizontal": 1,
+      "loop": false,
+      "interval": 0,
+      "sheets": 1,
+      "scope": [
+        "game",
+        "button",
+        "all"
+      ]
+    },
+    {
+      "name": "not_pushD",
+      "path": "./data/graph/game/notpushD.png",
+      "width": 64,
+      "height": 40,
+      "vertical": 1,
+      "horizontal": 1,
+      "loop": false,
+      "interval": 0,
+      "sheets": 1,
+      "scope": [
+        "game",
+        "button",
+        "all"
+      ]
+    },
+    {
+      "name": "not_pushJ",
+      "path": "./data/graph/game/notpushJ.png",
+      "width": 64,
+      "height": 40,
+      "vertical": 1,
+      "horizontal": 1,
+      "loop": false,
+      "interval": 0,
+      "sheets": 1,
+      "scope": [
+        "game",
+        "button",
+        "all"
+      ]
+    },
+    {
+      "name": "result_back",
+      "path": "./data/graph/ending/EndingSceneBack.png",
+      "width": 1920,
+      "height": 1080,
+      "vertical": 1,
+      "horizontal": 1,
+      "loop": false,
+      "interval": 0,
+      "sheets": 1,
+      "scope": [
+        "result",
+        "back",
+        "all"
+      ]
+    },
+    {
+      "name": "result",
+      "path": "./data/graph/ending/result.png",
+      "width": 512,
+      "height": 128,
+      "vertical": 1,
+      "horizontal": 1,
+      "loop": false,
+      "interval": 0,
+      "sheets": 1,
+      "scope": [
+        "result",
+        "all"
+      ]
+    },
+    {
+      "name": "rankS",
+      "path": "./data/graph/ending/rankS.png",
+      "width": 64,
+      "height": 64,
+      "vertical": 1,
+      "horizontal": 1,
+      "loop": false,
+      "interval": 0,
+      "sheets": 1,
+      "scope": [
+        "result",
+        "rank",
+        "all"
+      ]
+    },
+    {
+      "name": "rankA",
+      "path": "./data/graph/ending/rankA.png",
+      "width": 64,
+      "height": 64,
+      "vertical": 1,
+      "horizontal": 1,
+      "loop": false,
+      "interval": 0,
+      "sheets": 1,
+      "scope": [
+        "result",
+        "rank",
+        "all"
+      ]
+    },
+    {
+      "name": "rankB",
+      "path": "./data/graph/ending/rankB.png",
+      "width": 64,
+      "height": 64,
+      "vertical": 1,
+      "horizontal": 1,
+      "loop": false,
+      "interval": 0,
+      "sheets": 1,
+      "scope": [
+        "result",
+        "rank",
+        "all"
+      ]
+    },
+    {
+      "name": "rankC",
+      "path": "./data/graph/ending/rankC.png",
+      "width": 64,
+      "height": 64,
+      "vertical": 1,
+      "horizontal": 1,
+      "loop": false,
+      "interval": 0,
+      "sheets": 1,
+      "scope": [
+        "result",
+        "rank",
+        "all"
+      ]
+    },
+    {
+      "name": "result_guide",
+      "path": "./data/graph/ending/ResultGuide.png",
+      "width": 128,
+      "height": 64,
+      "vertical": 1,
+      "horizontal": 1,
+      "loop": false,
+      "interval": 0,
+      "sheets": 1,
+      "scope": [
+        "result",
+        "rank",
+        "all"
+      ]
+    },
+    {
+      "name": "full_combo",
+      "path": "./data/graph/ending/fullcombo.png",
+      "width": 256,
+      "height": 64,
+      "vertical": 1,
+      "horizontal": 1,
+      "loop": false,
+      "interval": 0,
+      "sheets": 1,
+      "scope": [
+        "result",
+        "ui",
+        "all"
+      ]
+    },
+    {
+      "name": "all_perfect",
+      "path": "./data/graph/ending/allperfect.png",
+      "width": 256,
+      "height": 64,
+      "vertical": 1,
+      "horizontal": 1,
+      "loop": false,
+      "interval": 0,
+      "sheets": 1,
+      "scope": [
+        "result",
+        "ui",
+        "all"
+      ]
+    }
+  ]
+}
