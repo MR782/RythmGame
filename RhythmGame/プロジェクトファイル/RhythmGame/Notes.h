@@ -24,6 +24,7 @@ class Notes : public Object {
 	//メソッド
 	void move();//移動を行う
 protected:
+	bool is_first;//自身がvectorの先頭にいるか
 	JudgeKey judge_key;//判定キー
 	float key_down_timing;//判定キーが押されたタイミング
 	float perfect_timing;//perfectのタイミング(フレーム単位)
@@ -35,6 +36,7 @@ public:
 	void finalize()final;
 	void update()final;
 
+	void set_is_first(bool);
 	bool get_active();//生存フラグを受け取らせる
 	JudgeResult get_result();//判定結果を受け取らせる
 	JudgeKey get_judge_key();//判定キーを受け取らせる

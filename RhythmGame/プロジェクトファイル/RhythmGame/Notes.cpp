@@ -14,6 +14,7 @@ Notes::Notes() : Object()
 	this->judge_key = JudgeKey::Key_D;
 	this->judge_result = JudgeResult::none;
 	this->key_down_timing = 0;
+	this->is_first = false;
 	this->perfect_timing = 0;
 }
 
@@ -37,6 +38,11 @@ void Notes::update()
 	this->judge_result = this->judge();
 	//”»’èŒ‹‰Ê‚ªo‚Ä‚¢‚é‚È‚ç
 	if (this->judge_result != JudgeResult::none) this->active = false;//‘¶Ý‚ðÁ‚·
+}
+
+void Notes::set_is_first(bool flag)
+{
+	this->is_first = flag;
 }
 
 bool Notes::get_active()

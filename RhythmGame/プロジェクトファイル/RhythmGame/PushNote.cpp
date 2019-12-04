@@ -6,18 +6,20 @@
 JudgeResult PushNotes::judge()
 {
 	JudgeResult result = JudgeResult::none;
+	//レーンの先頭出ないならまだ判定を行わない
+	if (this->is_first == false) return result;
 
 	//perfectのタイミングからどのくらいずれているかで判断する
 	float absolute = abs(this->perfect_timing - this->key_down_timing);
 	//誤差6フレーム以内なら
-	if (absolute < 6) {
+	if (absolute < 50) {
 		//perfect判定
 		result = JudgeResult::perfect;
 		//perfect判定をした音を鳴らす
 		Audio::play("perfect");
 	}
 	//誤差8フレーム以内なら
-	else if (absolute < 8) {
+	else if (absolute < 70) {
 		//good判定	
 		result = JudgeResult::good;
 		//good判定をした音を鳴らす

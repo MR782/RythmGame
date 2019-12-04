@@ -61,6 +61,28 @@ std::vector<NotesCreater::NotesData> NotesCreater::create_score(std::string name
 	return notes_data;
 }
 
+void NotesCreater::create_note(JudgeKey jk, NotesKind nk,float pt)
+{
+	std::unique_ptr<Notes> note = nullptr;
+	//種類によって生成するオブジェクトを変える
+	switch (nk)
+	{
+	case NotesKind::Hold:
+		note = std::make_unique<HoldNotes>();
+		break;
+	case NotesKind::Push:
+		note = std::make_unique<PushNotes>();
+		break;
+	default:
+		throw "memory dump";
+	}
+	//データ初期化
+	note->initialize();
+	note->set_contents(pt, jk);
+	//メモリの所有権移動
+	Model::notes.push_back(std::move(note));
+}
+
 int NotesCreater::get_all_notes_num(std::string name)
 {
 	int note_num = 0;
@@ -76,34 +98,17 @@ int NotesCreater::get_all_notes_num(std::string name)
 	return note_num;
 }
 
-std::vector<std::unique_ptr<Notes>> NotesCreater::get_notes_data(std::string name)
+void NotesCreater::get_notes_data(std::string name)
 {
-	std::vector<std::unique_ptr<Notes>> notes_data;
-	notes_data.clear();//配列の中身を空にしておく
+	//std::vector<std::unique_ptr<Notes>> notes_data;
+	//notes_data.clear();//配列の中身を空にしておく
+
 	for (auto itr = this->musical_score_datas.begin(); itr != this->musical_score_datas.end(); itr++) {
 		if ((*itr).name == name) {
 			for (auto itr2 = (*itr).notes.begin(); itr2 != (*itr).notes.end(); itr2++) {
-				std::unique_ptr<Notes> note = nullptr;
-				//種類によって生成するオブジェクトを変える
-				switch ((*itr2).kind)
-				{
-				case NotesKind::Hold:
-					note = std::make_unique<HoldNotes>();
-					break;
-				case NotesKind::Push:
-					note = std::make_unique<PushNotes>();
-					break;
-				}
-				//メモリ確保できなかったら例外を投げる
-				if(note == nullptr) throw"NotesCreater note is null_ptr";
-				//データ初期化
-				note->initialize();
-				note->set_contents((*itr2).p_timing, (*itr2).j_key);
-				//メモリの所有権移動
-				notes_data.push_back(std::move(note));
+				create_note((*itr2).j_key, (*itr2).kind, (*itr2).p_timing);
 			}
 			break;
 		}
 	}
-	return notes_data;
 }

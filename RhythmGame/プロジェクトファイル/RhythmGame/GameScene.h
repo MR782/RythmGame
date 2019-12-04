@@ -1,20 +1,22 @@
 #pragma once
-#include"Notes.h"
+#include"NotesRane.h"
 #include"JudgeLine.h"
 #include"NotesCreater.h"
 #include"Scene.h"
 #include"JudgeResultUI.h"
 #include"GameUI.h"
-#include"JudgeResultCreater.h"
 
 class Game : public Scene{
 	//ゲームシーン開始時間
 	LARGE_INTEGER start_time;
 	LARGE_INTEGER now_time;
+	LARGE_INTEGER freq;
 	//ノーツの生成装置
 	NotesCreater *notes_creater;
 	//判定結果の生成装置
-	JudgeResultCreater *result_creater;
+	//JudgeResultCreater *result_creater;
+	//ノーツコントローラー
+	NotesController* notes_controller;
 	//UI
 	GameUI* game_ui;
 	//メソッド
@@ -25,8 +27,6 @@ class Game : public Scene{
 	void set_musical_score();
 	//音楽を再生する
 	void start_music();
-	//スコアを追加する
-	void add_score(JudgeResult jr);
 public:
 	Game();
 	void initialize()override;

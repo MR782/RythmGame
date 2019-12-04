@@ -9,6 +9,9 @@
 #include"MemoryFunc.h"
 #include"./dxlib/DxLib.h"
 
+#include<time.h>
+#include <windows.h>
+
 //カウンタ
 float Counter::game_cnt;
 int Counter::perfect_cnt;
@@ -23,11 +26,12 @@ std::vector<std::unique_ptr<JudgeResultUI>> Model::judge_results;
 
 Game::Game() :Scene()
 {
+	this->notes_controller = nullptr;
 	this->game_ui = nullptr;
 	this->notes_creater = nullptr;
-	this->result_creater = nullptr;
 	this->start_time.QuadPart = 0;
 	this->now_time.QuadPart = 0;
+	this->freq.QuadPart = 0;
 }
 
 void Game::initialize()
@@ -36,6 +40,7 @@ void Game::initialize()
 	Audio::load("game");
 	//データ削除
 	Model::notes.clear();
+
 	//メモリ確保 - メモリ確保できていないなら例外を投げる
 	//判定ライン------------------------------------------------------------------
 	Model::judge_line = new JudgeLine();
@@ -46,19 +51,22 @@ void Game::initialize()
 	//ノーツの生成装置----------------------------------------------------------------
 	notes_creater = new NotesCreater();
 	MemoryFunction::check_mem(notes_creater);
-	//判定結果の生成装置--------------------------------------------------------------
-	result_creater = new JudgeResultCreater();
+	//ノーツコントローラー----------------------------------------------------------
+	notes_controller = new NotesController();
+	MemoryFunction::check_mem(this->notes_controller);
 	//オブジェクトの初期化
 	Model::judge_line->initialize();//判定ラインの初期化
 	this->notes_creater->initialize();
 	this->game_ui->initialize();//UIの初期化
 	//選択楽曲によって読み込むデータを変える
 	set_musical_score();
-	if (Model::notes.empty())throw("生成するノーツが空っぽです");
+	this->notes_controller->initialize();
 
 	//カウンタの初期化-----------------------------------------------------------------
-	this->start_time.QuadPart = (LONGLONG)GetNowHiPerformanceCount();//開始時間を取得
-	this->now_time.QuadPart = 0;//時間の更新
+	QueryPerformanceFrequency(&this->freq);
+	QueryPerformanceCounter(&this->start_time);
+	QueryPerformanceCounter(&this->now_time);
+
 	Counter::game_cnt = 0;
 	Counter::perfect_cnt = 0;
 	Counter::good_cnt = 0;
@@ -79,26 +87,21 @@ void Game::finalize()
 	//メモリ開放
 	Model::judge_results.clear();
 	Model::notes.clear();
+
 	delete Model::judge_line;
 	delete this->notes_creater;
-	delete this->result_creater;
 	delete this->game_ui;
+	delete this->notes_controller;
 }
 
 void Game::update()
 {
 	//ゲームカウンタの更新
-	this->now_time.QuadPart = (LONGLONG)GetNowHiPerformanceCount();//時間の更新
+	QueryPerformanceCounter(&this->now_time);
 	//マイクロ秒からミリ秒に変換してフレームに変換
-	Counter::game_cnt = ((now_time.QuadPart - start_time.QuadPart) / 1000) / 16.666666667f;//フレーム単位に変換
+	Counter::game_cnt = ((now_time.QuadPart - start_time.QuadPart) * 1000) / this->freq.QuadPart / 16.666666667f;//フレーム単位に変換
 	//ノーツの更新処理
-	for (auto itr = Model::notes.begin(); itr != Model::notes.end(); itr++) {
-		if ((*itr) != nullptr) {
-			(*itr)->update();
-		}
-	}
-	//ノーツの削除処理
-	delete_notes();
+	this->notes_controller->update();
 	//判定結果
 	for (auto itr = Model::judge_results.begin(); itr != Model::judge_results.end(); itr++) {
 		(*itr)->update();
@@ -131,7 +134,7 @@ void Game::draw()
 	const int judge_lineX = (int)Model::judge_line->get_position().x;
 	const int judge_lineY = (int)Model::judge_line->get_position().y;
 	DrawBox(judge_lineX, 0, judge_lineX + judge_line_width, judge_lineY, GetColor(0, 0, 0), TRUE);
-	for (int i = 0; i < buttonNum; i++) {
+	for (int i = 0; i <= buttonNum; i++) {
 		DrawLine(judge_lineX + note_width * i, 0,
 			judge_lineX + note_width * i,
 			judge_lineY + judge_line_height,
@@ -140,9 +143,10 @@ void Game::draw()
 	//判定ラインの描画---------------------------------------------------------
 	Model::judge_line->draw();
 	//ノーツの描画処理
-	for (auto itr = Model::notes.begin(); itr != Model::notes.end(); itr++) {
+	/*for (auto itr = Model::notes.begin(); itr != Model::notes.end(); itr++) {
 		(*itr)->draw();
-	}
+	}*/
+	this->notes_controller->draw();
 	//UIの描画
 	this->game_ui->draw();
 	//判定結果
@@ -153,20 +157,20 @@ void Game::draw()
 
 void Game::delete_notes()
 {
-	//条件を満たしたNotesを削除
-	for (auto itr = Model::notes.begin(); itr != Model::notes.end(); itr++) {
-		if ((*itr)->get_active() == false) {
-			//判定が行われていないノーツがあるならもう一度探索
-			const bool continue_flag = ((*itr)->get_result() == JudgeResult::none);
-			if (continue_flag) continue;
-			add_score((*itr)->get_result());
-			//データを初期化してvectorに挿入
-			MemoryFunction::check_mem(result_creater);
-			result_creater->create((*itr)->get_result(), (*itr)->get_judge_key());
-			Model::notes.erase((itr));//vectorから削除
-			break;
-		}
-	}
+	////条件を満たしたNotesを削除
+	//for (auto itr = Model::notes.begin(); itr != Model::notes.end(); itr++) {
+	//	if ((*itr)->get_active() == false) {
+	//		//判定が行われていないノーツがあるならもう一度探索
+	//		const bool continue_flag = ((*itr)->get_result() == JudgeResult::none);
+	//		if (continue_flag) continue;
+	//		add_score((*itr)->get_result());
+	//		//データを初期化してvectorに挿入
+	//		MemoryFunction::check_mem(result_creater);
+	//		result_creater->create((*itr)->get_result(), (*itr)->get_judge_key());
+	//		Model::notes.erase((itr));//vectorから削除
+	//		break;
+	//	}
+	//}
 }
 
 void Game::delete_judge_resultUI()
@@ -186,10 +190,12 @@ void Game::set_musical_score()
 	switch (Necessary::get_music())
 	{
 	case MusicList::monoceros:
-		Model::notes = this->notes_creater->get_notes_data("monoceros");
+		//Model::notes = this->notes_creater->get_notes_data("monoceros");
+		this->notes_creater->get_notes_data("monoceros");
 		break;
 	case MusicList::fancie:
-		Model::notes = this->notes_creater->get_notes_data("fancie");
+		//Model::notes = this->notes_creater->get_notes_data("fancie");
+		this->notes_creater->get_notes_data("fancie");
 	}
 }
 
@@ -210,36 +216,4 @@ void Game::start_music()
 		throw "楽曲に無効な値が入っている";
 		break;
 	}
-}
-
-void Game::add_score(JudgeResult jr)
-{
-	int score = 0;
-	//判定結果を描画するためのオブジェクトをvectorに追加
-	//判定結果がどうだったかでスコアを増加させる
-	switch (jr)
-	{
-	case JudgeResult::perfect:
-		//増加するスコアの値を決定
-		score = theoretical_value / Counter::notes_num;
-		//カウンタ上昇
-		Counter::perfect_cnt++;
-		Counter::combo_cnt++;
-		break;
-	case JudgeResult::good:
-		//増加するスコアの値を決定
-		score = theoretical_value / Counter::notes_num / 2;
-		//カウンタ上昇
-		Counter::good_cnt++;
-		Counter::combo_cnt++;
-		break;
-	case JudgeResult::miss:
-		//増加するスコアの値を決定
-		score = 0;
-		//カウンタ上昇
-		Counter::miss_cnt++;
-		break;
-	}
-	//現在スコアに加算する
-	Necessary::set_score(Necessary::get_score() + score);
 }

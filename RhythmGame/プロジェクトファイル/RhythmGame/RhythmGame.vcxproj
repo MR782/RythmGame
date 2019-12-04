@@ -183,6 +183,7 @@
     <ClCompile Include="Necessary.cpp" />
     <ClCompile Include="Notes.cpp" />
     <ClCompile Include="NotesCreater.cpp" />
+    <ClCompile Include="NotesRane.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Purpose.cpp" />
     <ClCompile Include="PushNote.cpp" />
@@ -233,6 +234,7 @@
     <ClInclude Include="Necessary.h" />
     <ClInclude Include="Notes.h" />
     <ClInclude Include="NotesCreater.h" />
+    <ClInclude Include="NotesRane.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Purpose.h" />
     <ClInclude Include="PushNote.h" />

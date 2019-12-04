@@ -8,6 +8,8 @@
 JudgeResult HoldNotes::judge()
 {
 	JudgeResult jr = JudgeResult::none;
+	//レーンの先頭出ないならまだ判定を行わない
+	if (this->is_first == false) return jr;
 	float absolute = abs(this->perfect_timing - this->key_down_timing);//絶対値を求める
 	if (absolute >= 2) {
 		//まだ判定するべきでないなら
